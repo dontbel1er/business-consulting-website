@@ -30,7 +30,7 @@ function Footer() {
               <li><a href="mailto:birukov.nikolay@gmail.com">birukov.nikolay@gmail.com</a></li>
               <li>
                 <a>
-                  Saint Petersburg
+                  {t('contacts.address_value')}
                 </a>
               </li>
             </ul>
