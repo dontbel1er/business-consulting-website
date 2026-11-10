@@ -70,7 +70,7 @@ function ServiceCatalog() {
         </div>
       </section>
 
-      <section className="tile-parchment">
+      <section className="catalog-section">
         <div className="container">
           <div className="catalog-grid">
             {services.map((service, idx) => (

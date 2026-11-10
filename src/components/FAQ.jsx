@@ -12,7 +12,7 @@ function FAQ() {
   const toggle = (idx) => setOpenIdx((prev) => (prev === idx ? null : idx))
 
   return (
-    <section className="tile-light">
+    <section className="tile-light faq-section">
       <div className="container">
         <Reveal>
           <div className="section-header">

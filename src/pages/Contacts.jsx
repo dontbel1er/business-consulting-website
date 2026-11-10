@@ -8,15 +8,18 @@ function Contacts() {
 
   return (
     <>
+      {/* Hero остаётся белым — фон меняется только под карточками контактов */}
       <Hero
         showActions={false}
         title={t('contacts.title')}
         lead={t('contacts.lead')}
       />
-      <ContactsGrid />
-      <section className="tile-parchment section-follow">
+      <section className="contacts-section">
         <div className="container">
-          <YandexMap />
+          <ContactsGrid />
+          <div className="contacts-map">
+            <YandexMap />
+          </div>
         </div>
       </section>
     </>

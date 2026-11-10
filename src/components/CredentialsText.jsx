@@ -19,7 +19,7 @@ function CredentialsText() {
   ]
 
   return (
-    <section className="tile-parchment">
+    <section className="tile-light">
       <div className="container">
         <div className="credentials-section">
           <Reveal>

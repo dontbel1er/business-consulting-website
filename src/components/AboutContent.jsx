@@ -6,7 +6,7 @@ function AboutContent() {
   const { t } = useTranslation()
 
   return (
-    <section className="tile-parchment">
+    <section className="tile-light">
       <div className="container">
         <div className="about-content">
           <Reveal>

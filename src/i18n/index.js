@@ -186,6 +186,8 @@ const resources = {
         nav_title: 'Навигация',
         contact_title: 'Контакты',
         cta_text: 'Расскажите о задаче — отвечу в течение рабочего дня.',
+        privacy: 'Политика конфиденциальности',
+        privacy_placeholder: 'Ссылка-заглушка: укажите адрес страницы политики конфиденциальности',
         copy: '© 2026 Bconsult. Все права защищены.'
       }
     }
@@ -373,6 +375,8 @@ const resources = {
         nav_title: 'Navigation',
         contact_title: 'Contacts',
         cta_text: 'Tell me about the task — I reply within one business day.',
+        privacy: 'Privacy Policy',
+        privacy_placeholder: 'Placeholder link: point it to your privacy policy page',
         copy: '© 2026 Bconsult. All rights reserved.'
       }
     }

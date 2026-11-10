@@ -30,7 +30,7 @@ function Roadmap() {
 
   return (
     <>
-      <section className="tile-dark">
+      <section className="tile-dark dark-section">
         <div className="container">
           <div className="roadmap-card">
             <Reveal>
