@@ -62,6 +62,12 @@
   /* Chrome */
   --nav-h: 52px;
   --nav-h-scrolled: 48px;
+
+  /* Футер: материал и его итоговый тон над белым полотном страницы.
+     --footer-tone обязан совпадать с результатом наложения --footer-material
+     на белый — иначе на стыке секции и футера появится перепад тона. */
+  --footer-material: rgba(12, 12, 14, 0.84);
+  --footer-tone: rgb(51, 51, 53);
 }
 
 /* ===== Reset & base ===== */
@@ -986,14 +992,13 @@ main { padding-top: var(--nav-h); }
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: rgba(12, 12, 14, 0.80);
+  background: var(--footer-material);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
-  /* Материал проявляется из прозрачности — верхний край не режет. */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
 }
-/* Размытие верхнего края: полоса над футером, в которой контент тает. */
+/* Размытие верхнего края: полоса над футером, в которой контент тает.
+   Полоса ведёт ровно в тон футера — иначе на стыке тёмной секции и футера
+   виден скачок тона (под футером ничего нет, он последний в документе). */
 .footer::before {
   content: '';
   position: absolute;
@@ -1003,10 +1008,11 @@ main { padding-top: var(--nav-h); }
   height: 44px;
   z-index: 0;
   pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--footer-tone));
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000);
-  mask-image: linear-gradient(to bottom, transparent, #000);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 100%);
 }
 .footer a { color: rgba(255, 255, 255, 0.75); transition: color 0.2s; }
 .footer a:hover { color: #fff; }
@@ -1253,7 +1259,7 @@ main { padding-top: var(--nav-h); }
   .global-nav.is-scrolled { background: rgba(12, 12, 14, 0.98); }
   .nav-dropdown { background: #121214; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .footer::after { background: #0c0c0e; -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .footer::before { -webkit-backdrop-filter: none; backdrop-filter: none; display: none; }
+  .footer::before { -webkit-backdrop-filter: none; backdrop-filter: none; background: #0c0c0e; -webkit-mask-image: none; mask-image: none; }
   .lead-form-overlay { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(0, 0, 0, 0.6); }
 }
 
