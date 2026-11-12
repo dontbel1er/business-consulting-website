@@ -23,8 +23,8 @@ function Footer() {
             <div className="footer-contact">
               <h5>{t('footer.contact_title', 'Contacts')}</h5>
               <ul>
-                <li><a href="tel:+79218458135">+7 999 999 999</a></li>
-                <li><a href="mailto:birukov.nikolay@gmail.com">something@gmail.com</a></li>
+                <li><a href="tel:+79999999999">+7 999 999 999</a></li>
+                <li><a href="mailto:something@gmail.com">something@gmail.com</a></li>
                 <li><a>{t('contacts.address_value')}</a></li>
               </ul>
             </div>

@@ -8,12 +8,12 @@ function ContactsGrid() {
     {
       key: 'email',
       label: t('contacts.email_label'),
-      value: <a href="mailto:birukov.nikolay@gmail.com">something@gmail.com</a>
+      value: <a href="mailto:something@gmail.com">something@gmail.com</a>
     },
     {
       key: 'phone',
       label: t('contacts.phone_label'),
-      value: <a href="tel:+79218458135">+7 999 999 999</a>
+      value: <a href="tel:+79999999999">+7 999 999 999</a>
     },
     {
       key: 'address',

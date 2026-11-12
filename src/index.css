@@ -91,6 +91,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-optical-sizing: auto;
   overflow-x: hidden;
+  /* Собственный отклик на нажатие (`:active`) — системную подсветку тапа гасим,
+     иначе она рисует пятно поверх нашей обратной связи. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -202,18 +205,15 @@ main { padding-top: var(--nav-h); }
     opacity 0.22s var(--ease-standard),
     transform 0.12s ease-out;
 }
-.btn:active { transform: scale(0.96); transition-duration: 0.08s; }
 .btn:focus-visible { outline: 2px solid var(--blue-focus); outline-offset: 3px; }
 
 .btn-primary { background: var(--blue); color: #fff; }
-.btn-primary:hover { background: var(--blue-active); }
 
 .btn-secondary {
   background: transparent;
   color: var(--blue);
   border: 1px solid var(--blue);
 }
-.btn-secondary:hover { background: rgba(0, 102, 204, 0.06); }
 
 .btn-large { padding: 14px 28px; font-size: 18px; font-weight: 300; }
 .btn-small { padding: 9px 18px; font-size: 15px; }
@@ -237,6 +237,8 @@ main { padding-top: var(--nav-h); }
   transition:
     height 0.34s var(--ease-out),
     background-color 0.34s var(--ease-out);
+  /* гасим системную подсветку тапа — на мобильном она рисует пятно */
+  -webkit-tap-highlight-color: transparent;
 }
 .global-nav.is-scrolled {
   height: var(--nav-h-scrolled);
@@ -275,7 +277,6 @@ main { padding-top: var(--nav-h); }
   justify-self: start;
   transition: opacity 0.2s;
 }
-.logo:hover { opacity: 0.72; }
 
 .nav-links {
   position: relative;
@@ -291,7 +292,6 @@ main { padding-top: var(--nav-h); }
   transition: color 0.18s;
   padding: 4px 0;
 }
-.nav-links a:hover { color: #fff; }
 .nav-links a.active { color: #fff; }
 
 .nav-indicator {
@@ -332,7 +332,6 @@ main { padding-top: var(--nav-h); }
   touch-action: manipulation;
   transition: color 0.2s, background-color 0.2s;
 }
-.lang-btn:hover { color: #fff; }
 .lang-btn.active {
   background: rgba(255, 255, 255, 0.92);
   color: var(--ink);
@@ -351,8 +350,6 @@ main { padding-top: var(--nav-h); }
   touch-action: manipulation;
   transition: background-color 0.22s var(--ease-standard), transform 0.12s ease-out;
 }
-.nav-cta:hover { background: var(--blue-active); }
-.nav-cta:active { transform: scale(0.96); }
 .nav-cta:focus-visible { outline: 2px solid var(--blue-focus); outline-offset: 3px; }
 
 .nav-burger {
@@ -368,7 +365,6 @@ main { padding-top: var(--nav-h); }
   touch-action: manipulation;
   transition: background-color 0.2s;
 }
-.nav-burger:hover { background: rgba(255, 255, 255, 0.1); }
 .nav-burger svg { width: 100%; height: 100%; }
 
 /* Mobile sheet — springs open from the bar that owns it.
@@ -394,10 +390,21 @@ main { padding-top: var(--nav-h); }
   transition: color 0.18s, background-color 0.18s;
 }
 .nav-dropdown a:last-child { border-bottom: none; }
-.nav-dropdown a:hover, .nav-dropdown a.active {
+.nav-dropdown a.active {
   color: #fff;
   background: rgba(255, 255, 255, 0.06);
 }
+.nav-dropdown a:focus-visible {
+  outline: 2px solid var(--blue-focus);
+  outline-offset: -3px;
+  border-radius: 4px;
+}
+/* Отклик на нажатие — только цветом/прозрачностью, без подложки: круг на
+   круглой кнопке читался как «кружок». Плюс гасим системный tap-highlight
+   браузера, который тоже рисует пятно по тапу.
+   В дропдауне подложка, наоборот, нужна — по пункту списка без неё не видно,
+   попал ли палец. Там она привязана к :active, то есть горит только пока
+   палец удерживает нажатие. */
 
 /* ===== Hero ===== */
 .hero {
@@ -672,7 +679,6 @@ main { padding-top: var(--nav-h); }
   touch-action: manipulation;
   transition: color 0.2s;
 }
-.faq-question:hover { color: var(--blue); }
 .faq-question:focus-visible { outline: 2px solid var(--blue-focus); outline-offset: 4px; border-radius: 4px; }
 .faq-chevron {
   width: 14px;
@@ -704,7 +710,6 @@ main { padding-top: var(--nav-h); }
   padding: 30px 28px;
   transition: border-color 0.25s var(--ease-standard), transform 0.4s var(--ease-out);
 }
-.service-card:hover { border-color: rgba(0, 0, 0, 0.3); transform: translateY(-3px); }
 .service-card h3 { margin-bottom: 10px; }
 .service-card p { font-size: 15px; line-height: 1.5; color: var(--ink-48); }
 
@@ -728,11 +733,6 @@ main { padding-top: var(--nav-h); }
   overflow: hidden;
   transition: border-color 0.3s var(--ease-standard), transform 0.45s var(--ease-out),
     background-color 0.3s var(--ease-standard);
-}
-.portfolio-item:hover {
-  border-color: var(--hairline-dark);
-  background: rgba(255, 255, 255, 0.07);
-  transform: translateY(-3px);
 }
 .portfolio-index {
   position: absolute;
@@ -816,11 +816,6 @@ main { padding-top: var(--nav-h); }
   transition: border-color 0.25s var(--ease-standard), background-color 0.25s var(--ease-standard),
     transform 0.4s var(--ease-out);
 }
-.contact-card:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-3px);
-}
 .contact-card h3 {
   font-size: 13px;
   font-weight: 600;
@@ -835,7 +830,6 @@ main { padding-top: var(--nav-h); }
   word-break: break-word;
 }
 .contact-card a { transition: color 0.2s; }
-.contact-card a:hover { color: #fff; }
 
 /* ===== Catalog ===== */
 .section-hero { padding-bottom: 0; }
@@ -906,11 +900,6 @@ main { padding-top: var(--nav-h); }
   flex-direction: column;
   transition: border-color 0.25s var(--ease-standard), background-color 0.25s var(--ease-standard),
     transform 0.4s var(--ease-out);
-}
-.catalog-card:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-3px);
 }
 .catalog-card-header {
   display: flex;
@@ -1015,7 +1004,6 @@ main { padding-top: var(--nav-h); }
   mask-image: linear-gradient(to bottom, transparent 0, #000 100%);
 }
 .footer a { color: rgba(255, 255, 255, 0.75); transition: color 0.2s; }
-.footer a:hover { color: #fff; }
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 210px));
@@ -1063,7 +1051,6 @@ main { padding-top: var(--nav-h); }
   color: rgba(255, 255, 255, 0.55);
   transition: color 0.2s;
 }
-.footer .footer-privacy:hover { color: #fff; }
 
 /* ===== Lead form ===== */
 .lead-form-overlay {
@@ -1108,8 +1095,6 @@ main { padding-top: var(--nav-h); }
   touch-action: manipulation;
   transition: background-color 0.2s, color 0.2s, transform 0.12s ease-out;
 }
-.lead-form-close:hover { background: var(--hairline); color: var(--ink); }
-.lead-form-close:active { transform: scale(0.92); }
 .lead-form-modal h3 {
   font-size: 24px;
   font-weight: 600;
@@ -1175,6 +1160,78 @@ main { padding-top: var(--nav-h); }
 .lead-form-success-mark svg { width: 26px; height: 26px; }
 .lead-form-success h3 { padding: 0; margin-bottom: 10px; }
 .lead-form-success p { font-size: 15px; color: var(--ink-48); }
+
+/* ==========================================================================
+   Hover и нажатие
+
+   Hover живёт только там, где есть настоящий указатель И десктопная
+   раскладка: на тач-устройствах :hover залипает после тапа — остаётся
+   подсветка, пока не тапнешь в другое место. Одного `(hover: hover)`
+   мало: часть устройств (iPad с трекпадом) и режим эмуляции в девтулзах
+   сообщают hover: hover при мобильной ширине. Поэтому условие двойное.
+
+   Отклик на нажатие сделан кратковременным, через :active: он не залипает
+   и гаснет при отпускании.
+   ========================================================================== */
+@media (hover: hover) and (min-width: 834px) {
+  .btn-primary:hover { background: var(--blue-active); }
+  .btn-secondary:hover { background: rgba(0, 102, 204, 0.06); }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta:hover { background: var(--blue-active); }
+  .logo:hover { opacity: 0.72; }
+  .lang-btn:hover { color: #fff; }
+  /* У выбранного языка hover отключён: текст остаётся таким же, как в покое.
+     Общее правило красило его в белый — белым по белой плашке он пропадал. */
+  .lang-btn.active:hover { color: var(--ink); }
+  .faq-question:hover { color: var(--blue); }
+  .service-card:hover { border-color: rgba(0, 0, 0, 0.3); transform: translateY(-3px); }
+  .portfolio-item:hover {
+    border-color: var(--hairline-dark);
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-3px);
+  }
+  .contact-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px);
+  }
+  .catalog-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px);
+  }
+  .contact-card a:hover { color: #fff; }
+  .footer a:hover { color: #fff; }
+  .footer .footer-privacy:hover { color: #fff; }
+  .lead-form-close:hover { background: var(--hairline); color: var(--ink); }
+}
+
+/* Отклик на нажатие — единственная обратная связь на тач-устройствах.
+   Лёгкое уменьшение масштаба + приглушение цвета. */
+.btn:active { transform: scale(0.96); transition-duration: 0.08s; }
+.nav-cta:active { transform: scale(0.96); }
+.nav-burger:active { opacity: 0.65; }
+.lead-form-close:active { transform: scale(0.92); }
+.nav-links a:active { color: #fff; }
+/* В дропдауне подложка обязательна: по узкому тексту без неё не понять,
+   попал ли палец. Горит только пока палец удерживает нажатие. */
+.nav-dropdown a:active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.10);
+}
+.lang-btn:active { opacity: 0.7; }
+.logo:active { opacity: 0.72; }
+.faq-question:active { color: var(--blue); }
+.contact-card a:active,
+.footer a:active,
+.footer .footer-privacy:active { color: #fff; }
+.service-card:active,
+.portfolio-item:active,
+.contact-card:active,
+.catalog-card:active {
+  transform: scale(0.99);
+  transition-duration: 0.1s;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 1068px) {
@@ -1250,8 +1307,17 @@ main { padding-top: var(--nav-h); }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .btn:active, .service-card:hover, .catalog-card:hover, .contact-card:hover,
-  .portfolio-item:hover, .footer-social a:hover { transform: none; }
+  .btn:active,
+  .nav-cta:active,
+  .lead-form-close:active,
+  .service-card:active,
+  .portfolio-item:active,
+  .contact-card:active,
+  .catalog-card:active,
+  .service-card:hover,
+  .catalog-card:hover,
+  .contact-card:hover,
+  .portfolio-item:hover { transform: none; }
 }
 
 @media (prefers-reduced-transparency: reduce) {
